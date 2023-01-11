@@ -14,7 +14,7 @@ export default function Program() {
     <Box maxW={"container.xl"} mx={"auto"} mt={5}>
       <SimpleGrid columns={2} alignItems={"center"} gap={5}>
         {dietCategory.map((diet) => (
-          <Card bg={"white"} mx={"auto"}>
+          <Card bg={"gray.50"} mx={"auto"}>
             <CardBody>
               <Image src={diet.image} borderRadius={"md"} objectFit={"cover"} />
               <Heading my={3} fontSize={"xl"}>

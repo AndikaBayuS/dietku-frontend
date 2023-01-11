@@ -10,21 +10,26 @@ import {
   Link,
   Popover,
   PopoverTrigger,
-  PopoverContent,
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  FormControl,
+  FormLabel,
+  Input,
+  VStack,
 } from "@chakra-ui/react";
-import {
-  HamburgerIcon,
-  CloseIcon,
-  ChevronDownIcon,
-  ChevronRightIcon,
-} from "@chakra-ui/icons";
+import { HamburgerIcon, CloseIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import NextLink from "next/link";
 
 export default function Navbar() {
-  const { isOpen, onToggle } = useDisclosure();
+  const { isOpen, onToggle, onOpen, onClose } = useDisclosure();
 
   return (
     <Box>
@@ -82,6 +87,7 @@ export default function Navbar() {
             _hover={{
               bg: "green.300",
             }}
+            onClick={onOpen}
           >
             Masuk
           </Button>
@@ -98,6 +104,45 @@ export default function Navbar() {
       <Collapse in={isOpen} animateOpacity>
         <MobileNav />
       </Collapse>
+
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Daftar</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <VStack>
+              <FormControl>
+                <FormLabel>Nama</FormLabel>
+                <Input placeholder="Masukkan nama anda" />
+              </FormControl>
+              <FormControl>
+                <FormLabel>Username</FormLabel>
+                <Input placeholder="Masukkan username anda" />
+              </FormControl>
+              <FormControl>
+                <FormLabel>Email</FormLabel>
+                <Input placeholder="Masukkan alamat email anda" />
+              </FormControl>
+              <FormControl>
+                <FormLabel>Kata Sandi</FormLabel>
+                <Input placeholder="Masukkan kata sandi anda" />
+              </FormControl>
+              <FormControl>
+                <FormLabel>Ulangi kata sandi</FormLabel>
+                <Input placeholder="Ulangi kata sandi anda" />
+              </FormControl>
+            </VStack>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={onClose}>
+              Close
+            </Button>
+            <Button variant="ghost">Secondary Action</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Box>
   );
 }
