@@ -1,7 +1,9 @@
+import { clientReview } from "@/data/clientReview";
 import {
   Box,
   Card,
   CardBody,
+  Container,
   Heading,
   Image,
   SimpleGrid,
@@ -10,7 +12,7 @@ import {
 
 export default function ClientReview() {
   return (
-    <Box mt={"5rem"}>
+    <Container mt={"5rem"} maxW={"container.xl"} mx={"auto"}>
       <Text
         textAlign={"center"}
         fontSize={"4xl"}
@@ -19,27 +21,31 @@ export default function ClientReview() {
       >
         Testimoni Klien
       </Text>
-      <SimpleGrid columns={3} alignItems={"center"} gap={5}>
-        <Card bg={"white"} maxW={"xs"} borderRadius={"md"} shadow={"md"}>
-          <CardBody textAlign={"center"} mx={"auto"}>
-            <Image
-              src={"https://i.pravatar.cc/300"}
-              boxSize={"150px"}
-              borderRadius={"full"}
-              border={1}
-              display={"block"}
-              mx={"auto"}
-              borderColor={"green.200"}
-            />
-            <Heading my={4}>Halo</Heading>
-            <Text mb={3}>20 Tahun</Text>
-            <Text>
-              “Rekomendasi diet yang diberikan oleh Dietku membantu saya
-              menurunkan badan secara efisien”
-            </Text>
-          </CardBody>
-        </Card>
+      <SimpleGrid
+        columns={{ base: 1, md: 2, lg: 3 }}
+        alignItems={"center"}
+        gap={5}
+        mt={"5rem"}
+      >
+        {clientReview.map((review) => (
+          <Card bg={"white"} borderRadius={"md"} shadow={"md"}>
+            <CardBody textAlign={"center"} mx={"auto"}>
+              <Image
+                src={review?.image}
+                boxSize={"150px"}
+                borderRadius={"full"}
+                border={1}
+                display={"block"}
+                mx={"auto"}
+                borderColor={"green.200"}
+              />
+              <Heading my={4}>{review.name}</Heading>
+              <Text mb={3}>20 Tahun</Text>
+              <Text>{review.review}</Text>
+            </CardBody>
+          </Card>
+        ))}
       </SimpleGrid>
-    </Box>
+    </Container>
   );
 }
