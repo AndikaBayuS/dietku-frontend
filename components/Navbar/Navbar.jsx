@@ -17,19 +17,21 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
   FormControl,
   FormLabel,
   Input,
   VStack,
+  HStack,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import NextLink from "next/link";
+import { useState } from "react";
 
 export default function Navbar() {
   const { isOpen, onToggle, onOpen, onClose } = useDisclosure();
+  const [isFormLogin, setIsFormLogin] = useState(true);
 
   return (
     <Box>
@@ -111,36 +113,65 @@ export default function Navbar() {
           <ModalHeader>Daftar</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <VStack>
-              <FormControl>
-                <FormLabel>Nama</FormLabel>
-                <Input placeholder="Masukkan nama anda" />
-              </FormControl>
-              <FormControl>
-                <FormLabel>Username</FormLabel>
-                <Input placeholder="Masukkan username anda" />
-              </FormControl>
-              <FormControl>
-                <FormLabel>Email</FormLabel>
-                <Input placeholder="Masukkan alamat email anda" />
-              </FormControl>
-              <FormControl>
-                <FormLabel>Kata Sandi</FormLabel>
-                <Input placeholder="Masukkan kata sandi anda" />
-              </FormControl>
-              <FormControl>
-                <FormLabel>Ulangi kata sandi</FormLabel>
-                <Input placeholder="Ulangi kata sandi anda" />
-              </FormControl>
-            </VStack>
-          </ModalBody>
+            {isFormLogin ? (
+              <VStack spacing={5}>
+                <FormControl>
+                  <FormLabel>Email</FormLabel>
+                  <Input placeholder="Masukkan alamat email anda" />
+                </FormControl>
+                <FormControl>
+                  <FormLabel>Kata Sandi</FormLabel>
+                  <Input placeholder="Masukkan kata sandi anda" />
+                </FormControl>
+                <Button colorScheme={"green"}>Masuk</Button>
+                <HStack py={5}>
+                  <Text>Belum punya akun?</Text>
+                  <Text
+                    color={"green"}
+                    onClick={() => setIsFormLogin(false)}
+                    cursor={"pointer"}
+                  >
+                    Daftar
+                  </Text>
+                </HStack>
+              </VStack>
+            ) : (
+              <VStack spacing={5}>
+                <FormControl>
+                  <FormLabel>Nama</FormLabel>
+                  <Input placeholder="Masukkan nama anda" />
+                </FormControl>
+                <FormControl>
+                  <FormLabel>Username</FormLabel>
+                  <Input placeholder="Masukkan username anda" />
+                </FormControl>
+                <FormControl>
+                  <FormLabel>Email</FormLabel>
+                  <Input placeholder="Masukkan alamat email anda" />
+                </FormControl>
+                <FormControl>
+                  <FormLabel>Kata Sandi</FormLabel>
+                  <Input placeholder="Masukkan kata sandi anda" />
+                </FormControl>
+                <FormControl>
+                  <FormLabel>Ulangi kata sandi</FormLabel>
+                  <Input placeholder="Ulangi kata sandi anda" />
+                </FormControl>
 
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
-            </Button>
-            <Button variant="ghost">Secondary Action</Button>
-          </ModalFooter>
+                <Button colorScheme={"green"}>Daftar</Button>
+                <HStack py={5}>
+                  <Text>Sudah punya akun?</Text>
+                  <Text
+                    color={"green"}
+                    onClick={() => setIsFormLogin(true)}
+                    cursor={"pointer"}
+                  >
+                    Masuk
+                  </Text>
+                </HStack>
+              </VStack>
+            )}
+          </ModalBody>
         </ModalContent>
       </Modal>
     </Box>
