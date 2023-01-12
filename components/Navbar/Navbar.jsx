@@ -28,10 +28,22 @@ import {
 import { HamburgerIcon, CloseIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import NextLink from "next/link";
 import { useState } from "react";
+import { useFormik } from "formik";
+import { registerUser } from "@/utils/axios";
 
 export default function Navbar() {
   const { isOpen, onToggle, onOpen, onClose } = useDisclosure();
   const [isFormLogin, setIsFormLogin] = useState(true);
+  const registerForm = useFormik({
+    initialValues: {
+      username: "",
+      email: "",
+      password: "",
+    },
+    onSubmit: (values) => {
+      registerUser(values.username, values.email, values.password);
+    },
+  });
 
   return (
     <Box>
@@ -121,7 +133,7 @@ export default function Navbar() {
                 </FormControl>
                 <FormControl>
                   <FormLabel>Kata Sandi</FormLabel>
-                  <Input placeholder="Masukkan kata sandi anda" />
+                  <Input type="password" placeholder="Masukkan kata sandi anda" />
                 </FormControl>
                 <Button colorScheme={"green"}>Masuk</Button>
                 <HStack py={5}>
@@ -136,40 +148,59 @@ export default function Navbar() {
                 </HStack>
               </VStack>
             ) : (
-              <VStack spacing={5}>
-                <FormControl>
-                  <FormLabel>Nama</FormLabel>
-                  <Input placeholder="Masukkan nama anda" />
-                </FormControl>
-                <FormControl>
-                  <FormLabel>Username</FormLabel>
-                  <Input placeholder="Masukkan username anda" />
-                </FormControl>
-                <FormControl>
-                  <FormLabel>Email</FormLabel>
-                  <Input placeholder="Masukkan alamat email anda" />
-                </FormControl>
-                <FormControl>
-                  <FormLabel>Kata Sandi</FormLabel>
-                  <Input placeholder="Masukkan kata sandi anda" />
-                </FormControl>
-                <FormControl>
-                  <FormLabel>Ulangi kata sandi</FormLabel>
-                  <Input placeholder="Ulangi kata sandi anda" />
-                </FormControl>
+              <form onSubmit={registerForm.handleSubmit}>
+                <VStack spacing={5}>
+                  {/* <FormControl>
+                    <FormLabel>Nama</FormLabel>
+                    <Input placeholder="Masukkan nama anda" id="" />
+                  </FormControl> */}
+                  <FormControl>
+                    <FormLabel>Username</FormLabel>
+                    <Input
+                      placeholder="Masukkan username anda"
+                      id="username"
+                      name="username"
+                      onChange={registerForm.handleChange}
+                      value={registerForm.values.username}
+                    />
+                  </FormControl>
+                  <FormControl>
+                    <FormLabel>Email</FormLabel>
+                    <Input
+                      placeholder="Masukkan alamat email anda"
+                      id="email"
+                      name="email"
+                      onChange={registerForm.handleChange}
+                      value={registerForm.values.email}
+                    />
+                  </FormControl>
+                  <FormControl>
+                    <FormLabel>Kata Sandi</FormLabel>
+                    <Input
+                      type="password"
+                      placeholder="Masukkan kata sandi anda"
+                      id="password"
+                      name="password"
+                      onChange={registerForm.handleChange}
+                      value={registerForm.values.password}
+                    />
+                  </FormControl>
 
-                <Button colorScheme={"green"}>Daftar</Button>
-                <HStack py={5}>
-                  <Text>Sudah punya akun?</Text>
-                  <Text
-                    color={"green"}
-                    onClick={() => setIsFormLogin(true)}
-                    cursor={"pointer"}
-                  >
-                    Masuk
-                  </Text>
-                </HStack>
-              </VStack>
+                  <Button colorScheme={"green"} type="submit">
+                    Daftar
+                  </Button>
+                  <HStack py={5}>
+                    <Text>Sudah punya akun?</Text>
+                    <Text
+                      color={"green"}
+                      onClick={() => setIsFormLogin(true)}
+                      cursor={"pointer"}
+                    >
+                      Masuk
+                    </Text>
+                  </HStack>
+                </VStack>
+              </form>
             )}
           </ModalBody>
         </ModalContent>
