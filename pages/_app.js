@@ -1,5 +1,5 @@
 import { Box, ChakraProvider } from "@chakra-ui/react";
-import Navbar from "../components/Navbar/Navbar";
+import Navbar from "../components/fragments/Navbar/Navbar";
 import "styles/globals.css";
 
 function MyApp({ Component, pageProps }) {

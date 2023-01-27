@@ -12,10 +12,19 @@ import {
 export default function Program() {
   return (
     <Box maxW={"container.xl"} mx={"auto"} mt={5}>
-      <SimpleGrid columns={2} alignItems={"center"} gap={5}>
+      <SimpleGrid columns={3} alignItems={"center"} gap={5}>
         {dietCategory.map((diet) => (
-          <Card bg={"gray.50"} mx={"auto"}>
-            <CardBody>
+          <Card
+            bg={"gray.50"}
+            mx={"auto"}
+            variant={"outline"}
+            transition={"all 0.3s ease-in-out"}
+            cursor={"pointer"}
+            shadow={"sm"}
+            _hover={{ borderColor: "green.500" }}
+          >
+            <CardBody             transition={"all 0.3s ease"}
+            _hover={{ border: "10px", borderColor: "green.500" }}>
               <Image src={diet.image} borderRadius={"md"} objectFit={"cover"} />
               <Heading my={3} fontSize={"xl"}>
                 {diet.title}

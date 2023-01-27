@@ -19,17 +19,14 @@ import {
   ModalHeader,
   ModalBody,
   ModalCloseButton,
-  FormControl,
-  FormLabel,
-  Input,
-  VStack,
-  HStack,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import NextLink from "next/link";
 import { useState } from "react";
 import { useFormik } from "formik";
-import { registerUser } from "@/utils/axios";
+import { loginUser, registerUser } from "@/utils/axios";
+import FormLogin from "@/components/forms/FormLogin/FormLogin";
+import FormRegister from "@/components/forms/FormRegister/FormRegister";
 
 export default function Navbar() {
   const { isOpen, onToggle, onOpen, onClose } = useDisclosure();
@@ -44,6 +41,19 @@ export default function Navbar() {
       registerUser(values.username, values.email, values.password);
     },
   });
+
+  const loginForm = useFormik({
+    initialValues: {
+      username: "",
+      password: "",
+    },
+    onSubmit: (values) => {
+      loginUser(values.username, values.password);
+    },
+  });
+
+  const handleShowRegister = () => setIsFormLogin(false);
+  const handleShowLogin = () => setIsFormLogin(true);
 
   return (
     <Box>
@@ -95,24 +105,13 @@ export default function Navbar() {
             display={{ base: "none", md: "inline-flex" }}
             fontSize={"sm"}
             fontWeight={600}
-            color={"white"}
-            bg={"green.400"}
+            colorScheme={"green"}
             href={"#"}
-            _hover={{
-              bg: "green.300",
-            }}
             onClick={onOpen}
           >
             Masuk
           </Button>
         </Flex>
-
-        <Stack
-          flex={{ base: 1, md: 0 }}
-          justify={"flex-end"}
-          direction={"row"}
-          spacing={6}
-        ></Stack>
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
@@ -126,81 +125,15 @@ export default function Navbar() {
           <ModalCloseButton />
           <ModalBody>
             {isFormLogin ? (
-              <VStack spacing={5}>
-                <FormControl>
-                  <FormLabel>Email</FormLabel>
-                  <Input placeholder="Masukkan alamat email anda" />
-                </FormControl>
-                <FormControl>
-                  <FormLabel>Kata Sandi</FormLabel>
-                  <Input type="password" placeholder="Masukkan kata sandi anda" />
-                </FormControl>
-                <Button colorScheme={"green"}>Masuk</Button>
-                <HStack py={5}>
-                  <Text>Belum punya akun?</Text>
-                  <Text
-                    color={"green"}
-                    onClick={() => setIsFormLogin(false)}
-                    cursor={"pointer"}
-                  >
-                    Daftar
-                  </Text>
-                </HStack>
-              </VStack>
+              <FormLogin
+                loginForm={loginForm}
+                setIsFormLogin={handleShowRegister}
+              />
             ) : (
-              <form onSubmit={registerForm.handleSubmit}>
-                <VStack spacing={5}>
-                  {/* <FormControl>
-                    <FormLabel>Nama</FormLabel>
-                    <Input placeholder="Masukkan nama anda" id="" />
-                  </FormControl> */}
-                  <FormControl>
-                    <FormLabel>Username</FormLabel>
-                    <Input
-                      placeholder="Masukkan username anda"
-                      id="username"
-                      name="username"
-                      onChange={registerForm.handleChange}
-                      value={registerForm.values.username}
-                    />
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel>Email</FormLabel>
-                    <Input
-                      placeholder="Masukkan alamat email anda"
-                      id="email"
-                      name="email"
-                      onChange={registerForm.handleChange}
-                      value={registerForm.values.email}
-                    />
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel>Kata Sandi</FormLabel>
-                    <Input
-                      type="password"
-                      placeholder="Masukkan kata sandi anda"
-                      id="password"
-                      name="password"
-                      onChange={registerForm.handleChange}
-                      value={registerForm.values.password}
-                    />
-                  </FormControl>
-
-                  <Button colorScheme={"green"} type="submit">
-                    Daftar
-                  </Button>
-                  <HStack py={5}>
-                    <Text>Sudah punya akun?</Text>
-                    <Text
-                      color={"green"}
-                      onClick={() => setIsFormLogin(true)}
-                      cursor={"pointer"}
-                    >
-                      Masuk
-                    </Text>
-                  </HStack>
-                </VStack>
-              </form>
+              <FormRegister
+                registerForm={registerForm}
+                setIsFormLogin={handleShowLogin}
+              />
             )}
           </ModalBody>
         </ModalContent>

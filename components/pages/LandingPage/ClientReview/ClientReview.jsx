@@ -22,7 +22,7 @@ export default function ClientReview() {
         Testimoni Klien
       </Text>
       <SimpleGrid
-        columns={{ base: 1, md: 2, lg: 3 }}
+        columns={{ base: 1, md: 2, lg: 4 }}
         alignItems={"center"}
         gap={5}
         mt={"5rem"}

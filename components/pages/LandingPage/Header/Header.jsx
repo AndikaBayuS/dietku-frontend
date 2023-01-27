@@ -1,10 +1,4 @@
-import {
-  Box,
-  SimpleGrid,
-  Text,
-  Button,
-  Container,
-} from "@chakra-ui/react";
+import { Box, SimpleGrid, Text, Button, Container } from "@chakra-ui/react";
 import Lottie from "react-lottie-player";
 import lottieFood from "@/components/Lottie/lottie-food.json";
 
@@ -22,7 +16,11 @@ export default function Header() {
             ever since the 1500s, when an unknown printer took a galley of type
             and scrambled it to make a type specimen book.
           </Text>
-          <Button colorScheme={"green"} mt={5}>
+          <Button
+            mt={5}
+            size={"lg"}
+            color={"green.500"}
+          >
             Mulai
           </Button>
         </Box>

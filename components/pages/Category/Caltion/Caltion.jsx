@@ -2,12 +2,14 @@ import { calcCaltion } from "@/utils/calculators";
 import {
   Box,
   Button,
+  Divider,
   FormControl,
   FormLabel,
+  Grid,
+  GridItem,
   Input,
   Radio,
   RadioGroup,
-  Select,
   Stack,
   Text,
 } from "@chakra-ui/react";
@@ -38,77 +40,79 @@ export default function Caltion() {
         Hitung kalori yang Anda butuhkan dengan kalkulator Caltion{" "}
       </Text>
 
-      <Box>
-        <form onSubmit={formik.handleSubmit}>
-          <FormControl>
-            <FormLabel>Tinggi Badan</FormLabel>
-            <Input
-              type={"number"}
-              bg={"white"}
-              id="height"
-              name="height"
-              onChange={formik.handleChange}
-              value={formik.values.height}
-            />
-          </FormControl>
-
-          <FormControl>
-            <FormLabel>Berat Badan</FormLabel>
-            <Input
-              type={"number"}
-              bg={"white"}
-              id="weight"
-              name="weight"
-              onChange={formik.handleChange}
-              value={formik.values.weight}
-            />
-          </FormControl>
-
-          <FormControl>
-            <FormLabel>Usia</FormLabel>
-            <Input
-              type={"number"}
-              bg={"white"}
-              id="age"
-              name="age"
-              onChange={formik.handleChange}
-              value={formik.values.age}
-            />
-          </FormControl>
-
-          <FormControl>
-            <FormLabel>Jenis Kelamin</FormLabel>
-            <RadioGroup defaultValue="male">
-              <Stack direction="row">
-                <Radio
+      <Grid templateColumns={"repeat(3, 1fr)"} gap={5}>
+        <GridItem colSpan={2}>
+          <Box>
+            <form onSubmit={formik.handleSubmit}>
+              <FormControl>
+                <FormLabel>Tinggi Badan</FormLabel>
+                <Input
+                  type={"number"}
                   bg={"white"}
-                  id="gender"
-                  name="gender"
+                  id="height"
+                  name="height"
                   onChange={formik.handleChange}
-                  value="male"
-                  isChecked
-                >
-                  Pria
-                </Radio>
-                <Radio
+                  value={formik.values.height}
+                />
+              </FormControl>
+
+              <FormControl>
+                <FormLabel>Berat Badan</FormLabel>
+                <Input
+                  type={"number"}
                   bg={"white"}
-                  id="gender"
-                  name="gender"
+                  id="weight"
+                  name="weight"
                   onChange={formik.handleChange}
-                  value="female"
-                >
-                  Wanita
-                </Radio>
-              </Stack>
-            </RadioGroup>
-          </FormControl>
+                  value={formik.values.weight}
+                />
+              </FormControl>
 
-          <Button colorScheme={"green"} mt={5} type={"submit"}>
-            Hitung
-          </Button>
-        </form>
+              <FormControl>
+                <FormLabel>Usia</FormLabel>
+                <Input
+                  type={"number"}
+                  bg={"white"}
+                  id="age"
+                  name="age"
+                  onChange={formik.handleChange}
+                  value={formik.values.age}
+                />
+              </FormControl>
 
-        {/* <FormControl>
+              <FormControl>
+                <FormLabel>Jenis Kelamin</FormLabel>
+                <RadioGroup defaultValue="male">
+                  <Stack direction="row">
+                    <Radio
+                      bg={"white"}
+                      id="gender"
+                      name="gender"
+                      onChange={formik.handleChange}
+                      value="male"
+                      isChecked
+                    >
+                      Pria
+                    </Radio>
+                    <Radio
+                      bg={"white"}
+                      id="gender"
+                      name="gender"
+                      onChange={formik.handleChange}
+                      value="female"
+                    >
+                      Wanita
+                    </Radio>
+                  </Stack>
+                </RadioGroup>
+              </FormControl>
+
+              <Button colorScheme={"green"} mt={5} type={"submit"}>
+                Hitung
+              </Button>
+            </form>
+
+            {/* <FormControl>
           <FormLabel>Aktivitas</FormLabel>
           <Select placeholder="Select option" bg={"white"}>
             <option value="option1">Option 1</option>
@@ -116,7 +120,15 @@ export default function Caltion() {
             <option value="option3">Option 3</option>
           </Select>
         </FormControl> */}
-      </Box>
+          </Box>
+        </GridItem>
+        <GridItem>
+          <Stack direction="row" h={"full"}>
+            <Divider orientation="vertical" />
+            <Text>Hasil</Text>
+          </Stack>
+        </GridItem>
+      </Grid>
     </Box>
   );
 }
