@@ -8,28 +8,46 @@ import {
   Grid,
   GridItem,
   Input,
+  NumberInput,
+  NumberInputField,
   Radio,
   RadioGroup,
   Stack,
   Text,
+  VStack,
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
+import { useState } from "react";
 
 export default function Caltion() {
+  const [userBMI, setUserBMI] = useState(0);
+  const [showData, setShowData] = useState(false);
   const formik = useFormik({
     initialValues: {
-      weight: null,
-      height: null,
-      age: null,
+      weight: "",
+      height: "",
+      age: "",
       gender: "male",
-      bmi: 0,
     },
     onSubmit: (values) => {
-      alert(
+      setUserBMI(
         calcCaltion(values.weight, values.height, values.age, values.gender)
       );
+      setShowData(true);
     },
   });
+
+  const disableButton = () => {
+    if (formik.values.weight === "") {
+      return true;
+    } else if (formik.values.height === "") {
+      return true;
+    } else if (formik.values.age === "") {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   return (
     <Box maxW={"container.xl"} mx={"auto"} mt={5}>
@@ -58,26 +76,29 @@ export default function Caltion() {
 
               <FormControl>
                 <FormLabel>Berat Badan</FormLabel>
-                <Input
-                  type={"number"}
-                  bg={"white"}
-                  id="weight"
-                  name="weight"
-                  onChange={formik.handleChange}
-                  value={formik.values.weight}
-                />
+                <NumberInput min={0}>
+                  <NumberInputField
+                    bg={"white"}
+                    id="weight"
+                    name="weight"
+                    onChange={formik.handleChange}
+                    value={formik.values.weight}
+                  />
+                </NumberInput>
               </FormControl>
 
               <FormControl>
                 <FormLabel>Usia</FormLabel>
-                <Input
-                  type={"number"}
-                  bg={"white"}
-                  id="age"
-                  name="age"
-                  onChange={formik.handleChange}
-                  value={formik.values.age}
-                />
+                <NumberInput min={0}>
+                  <NumberInputField
+                    type={"number"}
+                    bg={"white"}
+                    id="age"
+                    name="age"
+                    onChange={formik.handleChange}
+                    value={formik.values.age}
+                  />
+                </NumberInput>
               </FormControl>
 
               <FormControl>
@@ -107,25 +128,47 @@ export default function Caltion() {
                 </RadioGroup>
               </FormControl>
 
-              <Button colorScheme={"green"} mt={5} type={"submit"}>
+              <Button
+                colorScheme={"green"}
+                mt={5}
+                type={"submit"}
+                disabled={disableButton()}
+              >
                 Hitung
               </Button>
             </form>
-
-            {/* <FormControl>
-          <FormLabel>Aktivitas</FormLabel>
-          <Select placeholder="Select option" bg={"white"}>
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
-          </Select>
-        </FormControl> */}
           </Box>
         </GridItem>
         <GridItem>
           <Stack direction="row" h={"full"}>
             <Divider orientation="vertical" />
-            <Text>Hasil</Text>
+            <VStack alignItems={"start"}>
+              <Text fontWeight={"semibold"}>Hasil Data</Text>
+              {showData ? (
+                <>
+                  <Text fontWeight={"semibold"}>
+                    Tinggi Badan: {formik.values.height}
+                  </Text>
+                  <Text fontWeight={"semibold"}>
+                    Berat Badan: {formik.values.weight}
+                  </Text>
+                  <Text fontWeight={"semibold"}>Umur: {formik.values.age}</Text>
+                  <Text fontWeight={"semibold"}>
+                    Jenis Kelamin:{" "}
+                    {formik.values.gender === "male" ? "Pria" : "Wanita"}
+                  </Text>
+                  <Text fontWeight={"semibold"}>
+                    Kebutuhan Kalori: {userBMI}
+                  </Text>
+                </>
+              ) : (
+                <>
+                  <Text textAlign={"center"}>
+                    Hasil kalkulasi akan ditampilkan disini
+                  </Text>
+                </>
+              )}
+            </VStack>
           </Stack>
         </GridItem>
       </Grid>
