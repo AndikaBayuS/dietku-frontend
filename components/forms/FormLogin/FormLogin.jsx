@@ -13,12 +13,12 @@ export default function FormLogin({ loginForm, setIsFormLogin }) {
     <form onSubmit={loginForm.handleSubmit}>
       <VStack spacing={5}>
         <FormControl>
-          <FormLabel>Username</FormLabel>
+          <FormLabel>Email</FormLabel>
           <Input
-            placeholder="Masukkan username anda"
-            id="username"
-            name="username"
-            value={loginForm.values.username}
+            placeholder="Masukkan alamat email anda"
+            id="email"
+            name="email"
+            value={loginForm.values.email}
             onChange={loginForm.handleChange}
           />
         </FormControl>

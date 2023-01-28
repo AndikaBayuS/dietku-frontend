@@ -44,11 +44,11 @@ export default function Navbar() {
 
   const loginForm = useFormik({
     initialValues: {
-      username: "",
+      email: "",
       password: "",
     },
     onSubmit: (values) => {
-      loginUser(values.username, values.password);
+      loginUser(values.email, values.password);
     },
   });
 
