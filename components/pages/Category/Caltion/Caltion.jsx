@@ -1,4 +1,6 @@
+import { calCalculator } from "@/utils/axios";
 import { calcCaltion } from "@/utils/calculators";
+import { getUserData } from "@/utils/common";
 import {
   Box,
   Button,
@@ -27,12 +29,10 @@ export default function Caltion() {
       weight: "",
       height: "",
       age: "",
-      gender: "male",
+      gender: "Laki-laki",
     },
     onSubmit: (values) => {
-      setUserBMI(
-        calcCaltion(values.weight, values.height, values.age, values.gender)
-      );
+      calCalculator(values.height, values.weight, values.age, values.gender)
       setShowData(true);
     },
   });
@@ -110,19 +110,19 @@ export default function Caltion() {
                       id="gender"
                       name="gender"
                       onChange={formik.handleChange}
-                      value="male"
+                      value="Laki-laki"
                       isChecked
                     >
-                      Pria
+                      Laki-laki
                     </Radio>
                     <Radio
                       bg={"white"}
                       id="gender"
                       name="gender"
                       onChange={formik.handleChange}
-                      value="female"
+                      value="Perempuan"
                     >
-                      Wanita
+                      Perempuan
                     </Radio>
                   </Stack>
                 </RadioGroup>
@@ -154,12 +154,12 @@ export default function Caltion() {
                   </Text>
                   <Text fontWeight={"semibold"}>Umur: {formik.values.age}</Text>
                   <Text fontWeight={"semibold"}>
-                    Jenis Kelamin:{" "}
-                    {formik.values.gender === "male" ? "Pria" : "Wanita"}
+                    Jenis Kelamin: {formik.values.gender}
                   </Text>
                   <Text fontWeight={"semibold"}>
                     Kebutuhan Kalori: {userBMI}
                   </Text>
+                  <Button width={"full"} colorScheme={"green"}>Rekomendasi Makanan</Button>
                 </>
               ) : (
                 <>
