@@ -22,9 +22,12 @@ export default function Program() {
             cursor={"pointer"}
             shadow={"sm"}
             _hover={{ borderColor: "green.500" }}
+            key={diet.title}
           >
-            <CardBody             transition={"all 0.3s ease"}
-            _hover={{ border: "10px", borderColor: "green.500" }}>
+            <CardBody
+              transition={"all 0.3s ease"}
+              _hover={{ border: "10px", borderColor: "green.500" }}
+            >
               <Image src={diet.image} borderRadius={"md"} objectFit={"cover"} />
               <Heading my={3} fontSize={"xl"}>
                 {diet.title}

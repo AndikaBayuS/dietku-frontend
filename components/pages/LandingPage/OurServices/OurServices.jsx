@@ -35,6 +35,7 @@ export default function OurServices() {
             cursor={"pointer"}
             _hover={{ bgColor: "green.300" }}
             transition={"all 0.3s ease"}
+            key={service.title}
           >
             <CardBody padding={5}>
               <Center h={"full"}>

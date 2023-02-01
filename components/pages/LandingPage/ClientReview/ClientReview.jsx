@@ -28,7 +28,12 @@ export default function ClientReview() {
         mt={"5rem"}
       >
         {clientReview.map((review) => (
-          <Card bg={"white"} borderRadius={"md"} shadow={"md"}>
+          <Card
+            bg={"white"}
+            borderRadius={"md"}
+            shadow={"md"}
+            key={review.name}
+          >
             <CardBody textAlign={"center"} mx={"auto"}>
               <Image
                 src={review?.image}

@@ -33,7 +33,7 @@ export const getFoodsData = () => {
   });
 };
 
-export const calCalculator = (height, weight, age, gender) => {
+export const calCalculator = (height, weight, age, gender, setUserBMI) => {
   let userData = getUserData();
 
   return axios({
@@ -45,5 +45,7 @@ export const calCalculator = (height, weight, age, gender) => {
       umur: age,
       jk: gender,
     },
+  }).then((res) => {
+    setUserBMI(res.data.dataUser.kalori);
   });
 };

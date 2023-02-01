@@ -31,8 +31,14 @@ export default function Caltion() {
       age: "",
       gender: "Laki-laki",
     },
-    onSubmit: (values) => {
-      calCalculator(values.height, values.weight, values.age, values.gender)
+    onSubmit: async (values) => {
+      await calCalculator(
+        values.height,
+        values.weight,
+        values.age,
+        values.gender,
+        setUserBMI
+      );
       setShowData(true);
     },
   });
@@ -103,7 +109,7 @@ export default function Caltion() {
 
               <FormControl>
                 <FormLabel>Jenis Kelamin</FormLabel>
-                <RadioGroup defaultValue="male">
+                <RadioGroup defaultValue="Laki-laki">
                   <Stack direction="row">
                     <Radio
                       bg={"white"}
@@ -159,7 +165,9 @@ export default function Caltion() {
                   <Text fontWeight={"semibold"}>
                     Kebutuhan Kalori: {userBMI}
                   </Text>
-                  <Button width={"full"} colorScheme={"green"}>Rekomendasi Makanan</Button>
+                  <Button width={"full"} colorScheme={"green"}>
+                    Rekomendasi Makanan
+                  </Button>
                 </>
               ) : (
                 <>
