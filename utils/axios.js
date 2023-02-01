@@ -49,3 +49,12 @@ export const calCalculator = (height, weight, age, gender, setUserBMI) => {
     setUserBMI(res.data.dataUser.kalori);
   });
 };
+
+export const getUserInfo = () => {
+  let userData = getUserData();
+
+  return axios({
+    method: "GET",
+    url: `http://localhost:3000/users/${userData.userId}`,
+  });
+};

@@ -13,47 +13,17 @@ import {
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalCloseButton,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import NextLink from "next/link";
-import { useState } from "react";
-import { useFormik } from "formik";
-import { loginUser, registerUser } from "@/utils/axios";
-import FormLogin from "@/components/forms/FormLogin/FormLogin";
-import FormRegister from "@/components/forms/FormRegister/FormRegister";
+import { AuthModal } from "../AuthModal/AuthModal";
 
 export default function Navbar() {
-  const { isOpen, onToggle, onOpen, onClose } = useDisclosure();
-  const [isFormLogin, setIsFormLogin] = useState(true);
-  const registerForm = useFormik({
-    initialValues: {
-      username: "",
-      email: "",
-      password: "",
-    },
-    onSubmit: (values) => {
-      registerUser(values.username, values.email, values.password);
-    },
-  });
-
-  const loginForm = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-    onSubmit: (values) => {
-      loginUser(values.email, values.password);
-    },
-  });
-
-  const handleShowRegister = () => setIsFormLogin(false);
-  const handleShowLogin = () => setIsFormLogin(true);
+  const { isOpen, onToggle } = useDisclosure();
+  const {
+    onOpen: onOpenAuthModal,
+    onClose: onCloseAuthModal,
+  } = useDisclosure();
 
   return (
     <Box>
@@ -107,7 +77,7 @@ export default function Navbar() {
             fontWeight={600}
             colorScheme={"green"}
             href={"#"}
-            onClick={onOpen}
+            onClick={onOpenAuthModal}
           >
             Masuk
           </Button>
@@ -118,26 +88,10 @@ export default function Navbar() {
         <MobileNav />
       </Collapse>
 
-      <Modal isOpen={isOpen} onClose={onClose} isCentered>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Daftar</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            {isFormLogin ? (
-              <FormLogin
-                loginForm={loginForm}
-                setIsFormLogin={handleShowRegister}
-              />
-            ) : (
-              <FormRegister
-                registerForm={registerForm}
-                setIsFormLogin={handleShowLogin}
-              />
-            )}
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+      <AuthModal
+        onOpenAuthModal={onOpenAuthModal}
+        onCloseAuthModal={onCloseAuthModal}
+      />
     </Box>
   );
 }
