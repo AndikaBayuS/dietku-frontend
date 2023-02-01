@@ -23,6 +23,7 @@ export default function Navbar() {
   const {
     onOpen: onOpenAuthModal,
     onClose: onCloseAuthModal,
+    isOpen: isOpenAuthModal,
   } = useDisclosure();
 
   return (
@@ -89,7 +90,7 @@ export default function Navbar() {
       </Collapse>
 
       <AuthModal
-        onOpenAuthModal={onOpenAuthModal}
+        isOpenAuthModal={isOpenAuthModal}
         onCloseAuthModal={onCloseAuthModal}
       />
     </Box>
