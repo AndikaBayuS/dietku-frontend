@@ -1,12 +1,4 @@
-import {
-  Box,
-  Card,
-  CardBody,
-  Center,
-  Heading,
-  SimpleGrid,
-  Text,
-} from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import Head from "next/head";
 import ClientReview from "../components/pages/LandingPage/ClientReview/ClientReview";
 import Header from "../components/pages/LandingPage/Header/Header";

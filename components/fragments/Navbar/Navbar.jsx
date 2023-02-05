@@ -13,10 +13,13 @@ import {
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
+  Avatar,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import NextLink from "next/link";
 import { AuthModal } from "../AuthModal/AuthModal";
+import { getUserAuth } from "@/utils/axios";
+import { useEffect, useState } from "react";
 
 export default function Navbar() {
   const { isOpen, onToggle } = useDisclosure();
@@ -25,6 +28,13 @@ export default function Navbar() {
     onClose: onCloseAuthModal,
     isOpen: isOpenAuthModal,
   } = useDisclosure();
+  const [userInfo, setUserInfo] = useState();
+
+  useEffect(() => {
+    getUserAuth().then((res) => {
+      setUserInfo(res.data.user);
+    });
+  }, []);
 
   return (
     <Box>
@@ -72,16 +82,24 @@ export default function Navbar() {
             <DesktopNav />
           </Flex>
 
-          <Button
-            display={{ base: "none", md: "inline-flex" }}
-            fontSize={"sm"}
-            fontWeight={600}
-            colorScheme={"green"}
-            href={"#"}
-            onClick={onOpenAuthModal}
-          >
-            Masuk
-          </Button>
+          {!userInfo ? (
+            <Button
+              display={{ base: "none", md: "inline-flex" }}
+              fontSize={"sm"}
+              fontWeight={600}
+              colorScheme={"green"}
+              href={"#"}
+              onClick={onOpenAuthModal}
+            >
+              Masuk
+            </Button>
+          ) : (
+            <Avatar
+              size={"sm"}
+              name={userInfo.username}
+              backgroundColor={"green.300"}
+            />
+          )}
         </Flex>
       </Flex>
 
@@ -204,9 +222,5 @@ const NAV_ITEMS = [
   {
     label: "Kategori",
     href: "/category",
-  },
-  {
-    label: "Tentang",
-    href: "#",
   },
 ];

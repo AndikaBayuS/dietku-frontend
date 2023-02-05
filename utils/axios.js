@@ -1,10 +1,13 @@
 import axios from "axios";
 import { getUserData, setUserData } from "./common";
 
+const baseUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
+const userData = getUserData();
+
 export const registerUser = (username, email, password) => {
   return axios({
     method: "POST",
-    url: "http://localhost:3000/auth/register",
+    url: `${baseUrl}/auth/register`,
     data: {
       username,
       email,
@@ -16,7 +19,7 @@ export const registerUser = (username, email, password) => {
 export const loginUser = (email, password) => {
   return axios({
     method: "POST",
-    url: "http://localhost:3000/auth/login",
+    url: `${baseUrl}/auth/login`,
     data: {
       email,
       password,
@@ -29,32 +32,44 @@ export const loginUser = (email, password) => {
 export const getFoodsData = () => {
   return axios({
     method: "GET",
-    url: "http://localhost:3000/foods",
+    url: `${baseUrl}/foods`,
   });
 };
 
 export const calCalculator = (height, weight, age, gender, setUserBMI) => {
-  let userData = getUserData();
-
   return axios({
     method: "POST",
-    url: `http://localhost:3000/users/${userData.userId}`,
+    url: `${baseUrl}/users/${userData.userId}`,
     data: {
       tinggi_badan: height,
       berat_badan: weight,
       umur: age,
       jk: gender,
     },
+    headers: {
+      Authorization: `Bearer ${userData?.token}`,
+    }
   }).then((res) => {
     setUserBMI(res.data.dataUser.kalori);
   });
 };
 
 export const getUserInfo = () => {
-  let userData = getUserData();
-
   return axios({
     method: "GET",
-    url: `http://localhost:3000/users/${userData.userId}`,
+    url: `${baseUrl}/users/${userData?.userId}`,
+    headers: {
+      Authorization: `Bearer ${userData?.token}`,
+    }
+  });
+};
+
+export const getUserAuth = () => {
+  return axios({
+    method: "GET",
+    url: `${baseUrl}/auth/users/${userData?.userId}`,
+    headers: {
+      Authorization: `Bearer ${userData?.token}`,
+    }
   });
 };

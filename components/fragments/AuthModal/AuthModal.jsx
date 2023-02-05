@@ -1,5 +1,6 @@
 import FormLogin from "@/components/forms/FormLogin/FormLogin";
 import FormRegister from "@/components/forms/FormRegister/FormRegister";
+import { loginUser, registerUser } from "@/utils/axios";
 import {
   Modal,
   ModalBody,
@@ -7,7 +8,6 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
-  useDisclosure,
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import { useState } from "react";

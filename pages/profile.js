@@ -1,0 +1,80 @@
+import { Avatar, Box, Button, Divider, Flex, Text } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { FaUser, FaHistory } from "react-icons/fa";
+import { RiLogoutBoxRFill } from "react-icons/ri";
+import UserProfile from "@/components/pages/Profile/UserProfile/UserProfile";
+import { getUserInfo } from "@/utils/axios";
+
+export default function Profile() {
+  const [userData, setUserData] = useState();
+
+  useEffect(() => {
+    getUserInfo().then((res) => {
+      setUserData(res.data.user);
+    });
+  }, []);
+
+  return (
+    <Box maxW={"container.xl"} mx={"auto"} mt={5}>
+      <Flex>
+        <Box
+          shadow={"sm"}
+          border={"1px"}
+          borderColor={"gray.200"}
+          w={"30.5rem"}
+          maxH={"15rem"}
+          bgColor={"gray.50"}
+          borderRadius={"md"}
+          p={5}
+        >
+          <Flex>
+            <Avatar size={"md"} />
+            <Box ml={5}>
+              <Text>Nama User Disini</Text>
+              <Text color={"gray.500"}>Email User Disini</Text>
+            </Box>
+          </Flex>
+          <Divider my={5} />
+          <Box>
+            <Button
+              leftIcon={<FaUser />}
+              variant="ghost"
+              w={"full"}
+              justifyContent={"flex-start"}
+            >
+              Profil
+            </Button>
+            <Button
+              leftIcon={<FaHistory />}
+              variant="ghost"
+              w={"full"}
+              justifyContent={"flex-start"}
+            >
+              Riwayat
+            </Button>
+            <Button
+              leftIcon={<RiLogoutBoxRFill />}
+              variant="ghost"
+              w={"full"}
+              justifyContent={"flex-start"}
+            >
+              Keluar
+            </Button>
+          </Box>
+        </Box>
+        <Box
+          ml={5}
+          shadow={"sm"}
+          border={"1px"}
+          borderColor={"gray.200"}
+          w={"full"}
+          bgColor={"gray.50"}
+          borderRadius={"md"}
+          p={5}
+        >
+          <UserProfile userData={userData} />
+        </Box>
+      </Flex>
+    </Box>
+  );
+}
