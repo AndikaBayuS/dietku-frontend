@@ -15,6 +15,7 @@ import {
   useDisclosure,
   Avatar,
   HStack,
+  Image,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import NextLink from "next/link";
@@ -78,7 +79,13 @@ export default function Navbar() {
             fontFamily={"heading"}
             color={useColorModeValue("gray.800", "white")}
           >
-            Dietku
+            <Image
+              src="/dietku-logo.png"
+              alt="logo"
+              w="100px"
+              cursor={"pointer"}
+              onClick={() => router.push("/")}
+            />
           </Text>
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
