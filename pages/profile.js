@@ -28,10 +28,14 @@ export default function Profile() {
           p={5}
         >
           <Flex>
-            <Avatar size={"md"} />
+            <Avatar
+              size={"md"}
+              name={userData?.username}
+              backgroundColor={"green.300"}
+            />
             <Box ml={5}>
-              <Text>Nama User Disini</Text>
-              <Text color={"gray.500"}>Email User Disini</Text>
+              <Text>{userData?.username}</Text>
+              <Text color={"gray.500"}>{userData?.email}</Text>
             </Box>
           </Flex>
           <Divider my={5} />

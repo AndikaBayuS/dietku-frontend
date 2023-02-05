@@ -14,12 +14,14 @@ import {
   useBreakpointValue,
   useDisclosure,
   Avatar,
+  HStack,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import NextLink from "next/link";
 import { AuthModal } from "../AuthModal/AuthModal";
 import { getUserAuth } from "@/utils/axios";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 export default function Navbar() {
   const { isOpen, onToggle } = useDisclosure();
@@ -29,6 +31,7 @@ export default function Navbar() {
     isOpen: isOpenAuthModal,
   } = useDisclosure();
   const [userInfo, setUserInfo] = useState();
+  const router = useRouter();
 
   useEffect(() => {
     getUserAuth().then((res) => {
@@ -94,11 +97,22 @@ export default function Navbar() {
               Masuk
             </Button>
           ) : (
-            <Avatar
-              size={"sm"}
-              name={userInfo.username}
-              backgroundColor={"green.300"}
-            />
+            <HStack
+              py={2}
+              px={3}
+              bgColor={"gray.200"}
+              _hover={{ bgColor: "green.100" }}
+              rounded={"md"}
+              cursor={"pointer"}
+              onClick={() => router.push("/profile")}
+            >
+              <Avatar
+                size={"sm"}
+                name={userInfo.username}
+                backgroundColor={"green.300"}
+              />
+              <Text fontWeight={"semibold"}>{userInfo.username}</Text>
+            </HStack>
           )}
         </Flex>
       </Flex>
