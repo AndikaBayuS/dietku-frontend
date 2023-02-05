@@ -148,10 +148,11 @@ const DesktopNav = () => {
                 p={2}
                 href={navItem.href ?? "#"}
                 fontSize={"md"}
+                fontWeight={"semibold"}
                 color={"black"}
                 _hover={{
                   textDecoration: "none",
-                  color: "black",
+                  color: "green.500",
                 }}
               >
                 {navItem.label}
