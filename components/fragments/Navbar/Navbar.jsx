@@ -241,7 +241,7 @@ const NAV_ITEMS = [
     href: "/program",
   },
   {
-    label: "Kategori",
-    href: "/category",
+    label: "Kalkulator",
+    href: "/calculator",
   },
 ];

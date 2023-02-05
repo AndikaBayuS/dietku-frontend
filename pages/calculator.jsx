@@ -1,5 +1,5 @@
 import Caltion from "../components/pages/Category/Caltion/Caltion";
 
-export default function Category() {
+export default function Calculator() {
   return <Caltion />;
 }
