@@ -19,9 +19,11 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 export default function Caltion() {
+  const router = useRouter();
   const [userBMI, setUserBMI] = useState(0);
   const [showData, setShowData] = useState(false);
   const formik = useFormik({
@@ -168,7 +170,11 @@ export default function Caltion() {
                   <Text fontWeight={"semibold"}>
                     Kebutuhan Kalori: {userBMI}
                   </Text>
-                  <Button width={"full"} colorScheme={"green"}>
+                  <Button
+                    width={"full"}
+                    colorScheme={"green"}
+                    onClick={() => router.push("/foods")}
+                  >
                     Rekomendasi Makanan
                   </Button>
                 </>
