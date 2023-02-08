@@ -10,9 +10,11 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 export function AuthModal({ isOpenAuthModal, onCloseAuthModal }) {
+  const router = useRouter();
   const [isFormLogin, setIsFormLogin] = useState(true);
   const registerForm = useFormik({
     initialValues: {
@@ -31,7 +33,9 @@ export function AuthModal({ isOpenAuthModal, onCloseAuthModal }) {
       password: "",
     },
     onSubmit: (values) => {
-      loginUser(values.email, values.password);
+      loginUser(values.email, values.password).then(() => {
+        router.reload(window.location.pathname);
+      });
     },
   });
 

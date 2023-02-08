@@ -7,3 +7,9 @@ export function getUserData() {
     return JSON.parse(localStorage.getItem("DIETKU_USER"));
   }
 }
+
+export function removeUserData() {
+  if (typeof window !== "undefined") {
+    return localStorage.removeItem("DIETKU_USER");
+  }
+}

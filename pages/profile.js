@@ -1,12 +1,32 @@
-import { Avatar, Box, Button, Divider, Flex, Text } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Button,
+  Divider,
+  Flex,
+  Text,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { FaUser, FaHistory } from "react-icons/fa";
 import { RiLogoutBoxRFill } from "react-icons/ri";
 import UserProfile from "@/components/pages/Profile/UserProfile/UserProfile";
 import { getUserInfo } from "@/utils/axios";
+import { LogoutModal } from "@/components/fragments/LogoutModal/LogoutModal";
 
 export default function Profile() {
   const [userData, setUserData] = useState();
+  const [isMenu, setIsMenu] = useState("profile");
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const profileMenu = () => {
+    switch (isMenu) {
+      case "profile":
+        return <UserProfile userData={userData} />;
+      default:
+        return <UserProfile />;
+    }
+  };
 
   useEffect(() => {
     getUserInfo().then((res) => {
@@ -61,6 +81,7 @@ export default function Profile() {
               variant="ghost"
               w={"full"}
               justifyContent={"flex-start"}
+              onClick={onOpen}
             >
               Keluar
             </Button>
@@ -76,9 +97,11 @@ export default function Profile() {
           borderRadius={"md"}
           p={5}
         >
-          <UserProfile userData={userData} />
+          {profileMenu()}
         </Box>
       </Flex>
+
+      <LogoutModal isOpen={isOpen} onClose={onClose} />
     </Box>
   );
 }

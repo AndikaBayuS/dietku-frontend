@@ -23,6 +23,7 @@ import { AuthModal } from "../AuthModal/AuthModal";
 import { getUserAuth } from "@/utils/axios";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { getUserData } from "@/utils/common";
 
 export default function Navbar() {
   const { isOpen, onToggle } = useDisclosure();
@@ -35,9 +36,12 @@ export default function Navbar() {
   const router = useRouter();
 
   useEffect(() => {
-    getUserAuth().then((res) => {
-      setUserInfo(res.data.user);
-    });
+    const userData = getUserData();
+    if (userData) {
+      getUserAuth().then((res) => {
+        setUserInfo(res.data.user);
+      });
+    }
   }, []);
 
   return (
