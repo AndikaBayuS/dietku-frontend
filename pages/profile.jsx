@@ -39,12 +39,12 @@ export default function Profile() {
 
   return (
     <Box maxW={"container.xl"} mx={"auto"} mt={5}>
-      <Flex>
+      <Flex flexDirection={{ base: "column", md: "row" }} gap={5}>
         <Box
           shadow={"sm"}
           border={"1px"}
           borderColor={"gray.200"}
-          w={"30.5rem"}
+          w={{ md: "30.5rem" }}
           maxH={"15rem"}
           bgColor={"gray.50"}
           borderRadius={"md"}
@@ -93,7 +93,7 @@ export default function Profile() {
           </Box>
         </Box>
         <Box
-          ml={5}
+          ml={{ base: 0, md: 5 }}
           shadow={"sm"}
           border={"1px"}
           borderColor={"gray.200"}

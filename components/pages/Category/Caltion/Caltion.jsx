@@ -64,7 +64,10 @@ export default function Caltion() {
         Hitung kalori yang Anda butuhkan dengan kalkulator Caltion{" "}
       </Text>
 
-      <Grid templateColumns={"repeat(3, 1fr)"} gap={5}>
+      <Grid
+        templateColumns={{ base: "repeat(2, 2fr)", md: "repeat(3, 1fr)" }}
+        gap={5}
+      >
         <GridItem colSpan={2}>
           <Box>
             <form onSubmit={formik.handleSubmit}>

@@ -14,7 +14,7 @@ export default function Program() {
   const router = useRouter();
   return (
     <Box maxW={"container.xl"} mx={"auto"} mt={5}>
-      <SimpleGrid columns={3} alignItems={"center"} gap={5}>
+      <SimpleGrid columns={{ base: 1, md: 3 }} alignItems={"center"} gap={5}>
         {dietCategory.map((diet) => (
           <Card
             bg={"gray.50"}

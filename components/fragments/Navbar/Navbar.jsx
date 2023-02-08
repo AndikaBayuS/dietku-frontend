@@ -60,7 +60,7 @@ export default function Navbar() {
         align={"center"}
       >
         <Flex
-          flex={{ base: 1, md: "auto" }}
+          flex={{ md: "auto" }}
           ml={{ base: -2 }}
           display={{ base: "flex", md: "none" }}
         >
@@ -91,6 +91,7 @@ export default function Navbar() {
               w="100px"
               cursor={"pointer"}
               onClick={() => router.push("/")}
+              ml={{ base: -5 }}
             />
           </Text>
 
@@ -111,6 +112,7 @@ export default function Navbar() {
             </Button>
           ) : (
             <HStack
+              display={{ base: "none", md: "flex" }}
               py={2}
               px={3}
               bgColor={"gray.200"}
@@ -132,6 +134,37 @@ export default function Navbar() {
 
       <Collapse in={isOpen} animateOpacity>
         <MobileNav />
+        {!userInfo ? (
+          <Button
+            width={{ base: "full" }}
+            mb={{ base: 5 }}
+            fontSize={"sm"}
+            fontWeight={600}
+            colorScheme={"green"}
+            href={"#"}
+            onClick={onOpenAuthModal}
+          >
+            Masuk
+          </Button>
+        ) : (
+          <HStack
+            py={2}
+            px={3}
+            mb={{ base: 5 }}
+            bgColor={"gray.200"}
+            _hover={{ bgColor: "green.100" }}
+            rounded={"md"}
+            cursor={"pointer"}
+            onClick={() => router.push("/profile")}
+          >
+            <Avatar
+              size={"sm"}
+              name={userInfo.username}
+              backgroundColor={"green.300"}
+            />
+            <Text fontWeight={"semibold"}>{userInfo.username}</Text>
+          </HStack>
+        )}
       </Collapse>
 
       <AuthModal

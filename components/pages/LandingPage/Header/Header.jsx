@@ -16,13 +16,6 @@ export default function Header() {
             ever since the 1500s, when an unknown printer took a galley of type
             and scrambled it to make a type specimen book.
           </Text>
-          <Button
-            mt={5}
-            size={"lg"}
-            color={"green.500"}
-          >
-            Mulai
-          </Button>
         </Box>
         <Box>
           <Lottie
