@@ -13,6 +13,7 @@ import { RiLogoutBoxRFill } from "react-icons/ri";
 import UserProfile from "@/components/pages/Profile/UserProfile/UserProfile";
 import { getUserInfo } from "@/utils/axios";
 import { LogoutModal } from "@/components/fragments/LogoutModal/LogoutModal";
+import DietHistory from "@/components/pages/Profile/DietHistory/DietHistory";
 
 export default function Profile() {
   const [userData, setUserData] = useState();
@@ -23,6 +24,8 @@ export default function Profile() {
     switch (isMenu) {
       case "profile":
         return <UserProfile userData={userData} />;
+      case "history":
+        return <DietHistory />;
       default:
         return <UserProfile />;
     }
@@ -65,6 +68,7 @@ export default function Profile() {
               variant="ghost"
               w={"full"}
               justifyContent={"flex-start"}
+              onClick={() => setIsMenu("profile")}
             >
               Profil
             </Button>
@@ -73,6 +77,7 @@ export default function Profile() {
               variant="ghost"
               w={"full"}
               justifyContent={"flex-start"}
+              onClick={() => setIsMenu("history")}
             >
               Riwayat
             </Button>
