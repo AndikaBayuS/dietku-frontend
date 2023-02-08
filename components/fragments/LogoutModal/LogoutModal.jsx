@@ -15,7 +15,7 @@ export function LogoutModal({ isOpen, onClose }) {
   const router = useRouter();
   const logOut = async () => {
     await removeUserData();
-    router.reload("/");
+    router.push("/");
   };
 
   return (

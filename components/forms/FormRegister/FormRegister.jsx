@@ -8,7 +8,11 @@ import {
   VStack,
 } from "@chakra-ui/react";
 
-export default function FormRegister({ registerForm, setIsFormLogin }) {
+export default function FormRegister({
+  registerForm,
+  setIsFormLogin,
+  isLoading,
+}) {
   return (
     <form onSubmit={registerForm.handleSubmit}>
       <VStack spacing={5}>
@@ -44,16 +48,16 @@ export default function FormRegister({ registerForm, setIsFormLogin }) {
           />
         </FormControl>
 
-        <Button colorScheme={"green"} type="submit">
+        <Button
+          isLoading={isLoading}
+          colorScheme={"green"}
+          type={"submit"}
+        >
           Daftar
         </Button>
         <HStack py={5}>
           <Text>Sudah punya akun?</Text>
-          <Text
-            color={"green"}
-            onClick={setIsFormLogin}
-            cursor={"pointer"}
-          >
+          <Text color={"green"} onClick={setIsFormLogin} cursor={"pointer"}>
             Masuk
           </Text>
         </HStack>

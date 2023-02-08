@@ -18,6 +18,7 @@ export function AuthModal({ isOpenAuthModal, onCloseAuthModal }) {
   const router = useRouter();
   const toast = useToast();
   const [isFormLogin, setIsFormLogin] = useState(true);
+  const [isLoading, setIsloading] = useState(false);
   const registerForm = useFormik({
     initialValues: {
       username: "",
@@ -25,6 +26,7 @@ export function AuthModal({ isOpenAuthModal, onCloseAuthModal }) {
       password: "",
     },
     onSubmit: (values) => {
+      setIsloading(true);
       registerUser(values.username, values.email, values.password)
         .then(() => {
           toast({
@@ -34,6 +36,7 @@ export function AuthModal({ isOpenAuthModal, onCloseAuthModal }) {
             duration: 5000,
             isClosable: true,
           });
+          setIsloading(false);
         })
         .catch(() => {
           toast({
@@ -43,6 +46,7 @@ export function AuthModal({ isOpenAuthModal, onCloseAuthModal }) {
             duration: 5000,
             isClosable: true,
           });
+          setIsloading(false);
         });
     },
   });
@@ -53,6 +57,7 @@ export function AuthModal({ isOpenAuthModal, onCloseAuthModal }) {
       password: "",
     },
     onSubmit: (values) => {
+      setIsloading(true);
       loginUser(values.email, values.password)
         .then(() => {
           router.reload(window.location.pathname);
@@ -65,6 +70,7 @@ export function AuthModal({ isOpenAuthModal, onCloseAuthModal }) {
             duration: 5000,
             isClosable: true,
           });
+          setIsloading(false);
         });
     },
   });
@@ -83,11 +89,13 @@ export function AuthModal({ isOpenAuthModal, onCloseAuthModal }) {
             <FormLogin
               loginForm={loginForm}
               setIsFormLogin={handleShowRegister}
+              isLoading={isLoading}
             />
           ) : (
             <FormRegister
               registerForm={registerForm}
               setIsFormLogin={handleShowLogin}
+              isLoading={isLoading}
             />
           )}
         </ModalBody>

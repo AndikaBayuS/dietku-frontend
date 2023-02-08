@@ -41,8 +41,10 @@ export default function Navbar() {
       getUserAuth().then((res) => {
         setUserInfo(res.data.user);
       });
+    } else {
+      setUserInfo(null);
     }
-  }, []);
+  }, [userInfo]);
 
   return (
     <Box>
