@@ -8,6 +8,7 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
+  useToast,
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import { useRouter } from "next/router";
@@ -15,6 +16,7 @@ import { useState } from "react";
 
 export function AuthModal({ isOpenAuthModal, onCloseAuthModal }) {
   const router = useRouter();
+  const toast = useToast();
   const [isFormLogin, setIsFormLogin] = useState(true);
   const registerForm = useFormik({
     initialValues: {
@@ -23,7 +25,25 @@ export function AuthModal({ isOpenAuthModal, onCloseAuthModal }) {
       password: "",
     },
     onSubmit: (values) => {
-      registerUser(values.username, values.email, values.password);
+      registerUser(values.username, values.email, values.password)
+        .then(() => {
+          toast({
+            title: "Success",
+            description: "Berhasil mendaftar, silahkan login",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
+        })
+        .catch(() => {
+          toast({
+            title: "Error",
+            description: "Username atau email sudah digunakan",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        });
     },
   });
 
@@ -33,9 +53,19 @@ export function AuthModal({ isOpenAuthModal, onCloseAuthModal }) {
       password: "",
     },
     onSubmit: (values) => {
-      loginUser(values.email, values.password).then(() => {
-        router.reload(window.location.pathname);
-      });
+      loginUser(values.email, values.password)
+        .then(() => {
+          router.reload(window.location.pathname);
+        })
+        .catch(() => {
+          toast({
+            title: "Error",
+            description: "Periksa kembali email dan password anda",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        });
     },
   });
 
