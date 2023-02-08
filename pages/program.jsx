@@ -1,4 +1,4 @@
-import { dietCategory } from "@/data/DietCategory";
+import { dietCategory } from "@/data/dietCategory";
 import {
   Box,
   Card,
@@ -8,8 +8,10 @@ import {
   SimpleGrid,
   Text,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 
 export default function Program() {
+  const router = useRouter();
   return (
     <Box maxW={"container.xl"} mx={"auto"} mt={5}>
       <SimpleGrid columns={3} alignItems={"center"} gap={5}>
@@ -23,6 +25,7 @@ export default function Program() {
             shadow={"sm"}
             _hover={{ borderColor: "green.500" }}
             key={diet.title}
+            onClick={() => router.push(diet.url)}
           >
             <CardBody
               transition={"all 0.3s ease"}
