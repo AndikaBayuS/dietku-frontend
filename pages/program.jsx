@@ -1,4 +1,4 @@
-import { dietCategory } from "@/data/diettCategory";
+import { dietCategory } from "@/data/dietCategory";
 import {
   Box,
   Card,
