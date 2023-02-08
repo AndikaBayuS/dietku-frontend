@@ -1,30 +1,29 @@
 export const clientReview = [
   {
-    name: "John Doe",
+    name: "April Moe",
     age: 20,
-    image: "https://i.pravatar.cc/300",
+    image: "https://i.pravatar.cc/150?img=10",
     review:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut aliquam aliquam, nunc nisl aliquam nisl, eu aliquam nisl nisl sit amet lorem. Sed euismod, nunc ut aliquam aliquam, nunc nisl aliquam nisl, eu aliquam nisl nisl sit amet lorem.",
+      "Rekomendasi diet yang diberikan oleh Dietku membantu saya menurunkan badan secara efisien",
   },
   {
-    name: "John Blue",
+    name: "Alicia Blue",
     age: 25,
-    image: "https://i.pravatar.cc/300",
+    image: "https://i.pravatar.cc/150?img=9",
     review:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut aliquam aliquam, nunc nisl aliquam nisl, eu aliquam nisl nisl sit amet lorem. Sed euismod, nunc ut aliquam aliquam, nunc nisl aliquam nisl, eu aliquam nisl nisl sit amet lorem.",
+      "Dengan dietku saya bisa mengetahui berapa kalori yang saya butuhkan setiap harinya",
   },
   {
-    name: "Alice Black",
+    name: "Sarah Green",
     age: 30,
-    image: "https://i.pravatar.cc/300",
+    image: "https://i.pravatar.cc/150?img=5",
     review:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut aliquam aliquam, nunc nisl aliquam nisl, eu aliquam nisl nisl sit amet lorem. Sed euismod, nunc ut aliquam aliquam, nunc nisl aliquam nisl, eu aliquam nisl nisl sit amet lorem.",
+      "Terimakasih dietku karena dengan dietku saya bisa mengetahui rekomendasi makanan yang saya bisa konsumsi",
   },
   {
-    name: "Alice Red",
+    name: "John Red",
     age: 30,
-    image: "https://i.pravatar.cc/300",
-    review:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut aliquam aliquam, nunc nisl aliquam nisl, eu aliquam nisl nisl sit amet lorem. Sed euismod, nunc ut aliquam aliquam, nunc nisl aliquam nisl, eu aliquam nisl nisl sit amet lorem.",
+    image: "https://i.pravatar.cc/150?img=15",
+    review: "Dengan dietku saya bisa menjalani hidup sehat dan teratur",
   },
 ];

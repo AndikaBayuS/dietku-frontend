@@ -21,6 +21,7 @@ export default function Home() {
           mt={"5rem"}
         >
           <OurServices />
+          <ClientReview />
         </Box>
       </Box>
     </Box>
